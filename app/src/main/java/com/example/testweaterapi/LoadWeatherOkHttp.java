@@ -20,7 +20,7 @@ public class LoadWeatherOkHttp {
     String urlGetWeather = "http://api.openweathermap.org/data/2.5/weather?q=Moscow,ru&appid=e83d0265c9865659af525e50e89b8edd";
 
 
-    static WeatherApi getGSONData( String city) {
+    static WeatherApi getDataByOkHttp(String city) {
 //        WeatherApi weatherApi = null;
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q="+city+",ru&appid=e83d0265c9865659af525e50e89b8edd");
@@ -31,7 +31,7 @@ public class LoadWeatherOkHttp {
                     .url(url)
                     .build();
             Response response = okHttpClient.newCall(request).execute();
-            String rwData = response.body().toString();
+            String rwData = response.body().string();
 
 
             Log.i("rwData", rwData.toString());

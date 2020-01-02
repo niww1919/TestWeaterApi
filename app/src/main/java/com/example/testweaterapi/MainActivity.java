@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        loadWeatherData("Moscow" );
 //        loadWeatherData("Saint Petersburg" );
-        loadWeatherDataGson("Saint Petersburg" );
-//        loadWeatherDataOkHttp("Omsk");
+//        loadWeatherDataGson("Saint Petersburg" );
+        loadWeatherDataOkHttp("Omsk");
 
     }
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread() {
             @Override
             public void run() {
-                final WeatherApi weatherApi = LoadWeatherOkHttp.getGSONData(city);
+                final WeatherApi weatherApi = LoadWeatherOkHttp.getDataByOkHttp(city);
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
