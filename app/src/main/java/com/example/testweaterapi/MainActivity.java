@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        loadWeatherData("Moscow" );
-        loadWeatherData("Saint Petersburg" );
-//        loadWeatherDataGson("Moscow" );
+//        loadWeatherData("Saint Petersburg" );
+        loadWeatherDataGson("Saint Petersburg" );
+//        loadWeatherDataOkHttp("Omsk");
 
     }
 
@@ -59,7 +60,25 @@ public class MainActivity extends AppCompatActivity {
         new Thread() {
             @Override
             public void run() {
-                final WeatherApi weatherApi = LoadWeatherGson.getGSONData("Omsk");
+                final WeatherApi weatherApi = LoadWeatherGson.getGSONData(city);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+//                            readWeather(json);
+                            readWeatherGson(weatherApi);
+                            Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
+                        }
+                    });
+            }
+        }.start();
+
+    }
+
+    private void loadWeatherDataOkHttp(final String city) {
+        new Thread() {
+            @Override
+            public void run() {
+                final WeatherApi weatherApi = LoadWeatherOkHttp.getGSONData(city);
                     handler.post(new Runnable() {
                         @Override
                         public void run() {

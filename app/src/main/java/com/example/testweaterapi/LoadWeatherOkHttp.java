@@ -5,16 +5,17 @@ import android.util.Log;
 import com.example.testweaterapi.WeatherApi.WeatherApi;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class LoadWeatherGson {
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class LoadWeatherOkHttp {
 
     String urlGetWeather = "http://api.openweathermap.org/data/2.5/weather?q=Moscow,ru&appid=e83d0265c9865659af525e50e89b8edd";
 
@@ -24,14 +25,14 @@ public class LoadWeatherGson {
         try {
             URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q="+city+",ru&appid=e83d0265c9865659af525e50e89b8edd");
 
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder rwData = new StringBuilder(1024);
-            String temp;
-            while ((temp = reader.readLine()) != null) {
-                rwData.append(temp).append("\n");
-            }
-            reader.close();
+            OkHttpClient okHttpClient = new OkHttpClient();
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            Response response = okHttpClient.newCall(request).execute();
+            String rwData = response.body().toString();
+
 
             Log.i("rwData", rwData.toString());
 //            JSONObject jsonObject = new JSONObject(rwData.toString());
@@ -39,7 +40,7 @@ public class LoadWeatherGson {
             Gson gson = new Gson();
 //            WeatherApi weatherApi = gson.fromJson(rwData.toString(), WeatherApi.class);
             //use toJson???
-            WeatherApi weatherApi = gson.fromJson(rwData.toString(), WeatherApi.class);
+            WeatherApi weatherApi = gson.fromJson(rwData, WeatherApi.class);
 
 
 
