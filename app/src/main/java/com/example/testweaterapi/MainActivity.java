@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 final WeatherApi weatherApi = LoadWeatherOkHttp.getDataByOkHttp(city);
+                LoadWeatherRetrofit.getDataByRetrofit(city);//fixme test load data in log "retrofit"
+
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
