@@ -23,7 +23,8 @@ public class LoadWeatherOkHttp {
     static WeatherApi getDataByOkHttp(String city) {
 //        WeatherApi weatherApi = null;
         try {
-            URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q="+city+",ru&appid=e83d0265c9865659af525e50e89b8edd");
+//            URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q="+city+",ru&appid=e83d0265c9865659af525e50e89b8edd");
+            URL url = new URL("https://api.openweathermap.org/data/2.5/forecast?q="+city+",ru&appid=e83d0265c9865659af525e50e89b8edd");
 
             OkHttpClient okHttpClient = new OkHttpClient();
 

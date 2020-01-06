@@ -45,7 +45,7 @@ public class LoadWeatherRetrofit {
                 @Override
                 public void onResponse(Call<WeatherApi> call, Response<WeatherApi> response) {
                     WeatherApi weatherApi = response.body(); //fixme
-                    Log.i("retrofit", weatherApi.getName());
+                    Log.i("retrofit", weatherApi.getCity().getName());
                 }
 
                 @Override
@@ -65,9 +65,9 @@ public class LoadWeatherRetrofit {
     }
 
     interface ApiService {
-        @GET("data/2.5/weather?q=Moscow,ru&appid=e83d0265c9865659af525e50e89b8edd")
+        @GET("data/2.5/weather?q=Saint Petersburg,ru&appid=e83d0265c9865659af525e50e89b8edd")
         Call<WeatherApi> getCity();
 
 //        Call<WeatherApi> getWeather;
-    };
+    }
 }
